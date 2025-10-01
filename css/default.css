@@ -1,0 +1,19 @@
+body {
+  background-color: #eee;
+  color: #222
+}
+
+.button{
+    background-color: #222;
+    color: #eee;
+    padding: 15px;
+}
+
+.dark-mode {
+    background-color: #222;
+    color: #eee;
+    button{
+        background-color: #eee;
+        color: #222
+    }
+}
