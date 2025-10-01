@@ -2,8 +2,11 @@
 
 function toggleDarkMode() {
     document.body.classList.toggle("dark-mode");
+}
 
-    //toggleDarkModeButton = document.getElementById("dark-mode_toggle");
-    //toggleDarkModeButton.addEventListener("click", function() {
-    //});
+
+
+function openWebApp() {
+    filename = "app.html"
+    window.open("file:app.html")
 }
