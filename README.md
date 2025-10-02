@@ -1,4 +1,4 @@
-# Sketch Me Pose Me
+# Sketch & Pose
 App for posing creating character pose references for artists
 
 The online version is available at 
