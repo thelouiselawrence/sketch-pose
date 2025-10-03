@@ -12,4 +12,5 @@ In addition to being a useful tool (when it is finished), this app is an exercis
 - Add basic props (primitives, common furniture) and lights
 - Basic editing functionality (move, scale, rotate, duplicate, delete)
 - Save and upload models (eventually)
+- AR support (view models in the real world)
 
