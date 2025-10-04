@@ -17,6 +17,11 @@ body {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+canvas {
+    left: 0;
+    top: 0;
+}
+
 .button{
     background-color: #222;
     color: #eee;

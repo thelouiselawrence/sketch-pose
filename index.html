@@ -1,27 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
     <title>Sketch & Pose</title>
     <link rel="stylesheet" href="css/default.css">
     <link rel="stylesheet" href="css/slider.css">
+    <!-- <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+      }
+    }
+    </script> -->
   </head>
   <body>
     <h1 class="intro">Sketch & Pose</h1>
     <p class="intro">Welcome to Sketch & Pose, an online app for posing characters as references for artists.</p>
-    <button type="button", id="webapp", class="button intro", onclick="openWebApp()">
+    <button type="button" id="webappbutton" class="button intro">
       Open Web App
     </button>
     <br>
-    <label class = "text">
+    <label class="text">
       Dark Mode
     </label>
     <br>
     <!-- Rounded switch -->
     <label class="switch">
-      <input type="checkbox", id="dark-mode-toggle", onclick="toggleDarkMode()">
+      <input type="checkbox" id="darkmodetoggle">
       <!--<span class="slider round"></span>-->
       <span class="slider"></span>
     </label>
-    <script src="js/main.js"></script>
+    <script type="module" src="./js/main.js"></script>
   </body>
 </html>

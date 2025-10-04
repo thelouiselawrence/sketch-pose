@@ -1,0 +1,26 @@
+{
+  "name": "sketch-pose",
+  "version": "1.0.0",
+  "description": "App for posing creating character pose references for artists",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thelouiselawrence/sketch-pose.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thelouiselawrence/sketch-pose/issues"
+  },
+  "homepage": "https://github.com/thelouiselawrence/sketch-pose#readme",
+  "dependencies": {
+    "three": "^0.180.0",
+    "vite": "^7.1.9"
+  }
+}
