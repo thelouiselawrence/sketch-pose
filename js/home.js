@@ -13,6 +13,7 @@ function addToggleDarkModeButtonEventListener() {
 
 function toogleDarkMode() {
     document.body.classList.toggle("dark-mode");
+    // TODO toggle canvas background
 }
 
 

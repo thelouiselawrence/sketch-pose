@@ -1,82 +1,84 @@
-// code for basic button responses on the main page
+// code to call the modules
+
+// TODO canvas.js should call the Three.js module, not main.js
 
 console.log("JavaScript is working");
 
-import * as THREE from "three";
-console.log(THREE);
+// import * as THREE from "three";
+// console.log(THREE);
 
-import {createCanvas, refreshCanvasSize, getCurrentWindowDimensions} from "./canvas.js";
+import {createCanvas, getCurrentWindowDimensions, redraw} from "./canvas.js";
 import {addAllButtonEventListeners} from "./home.js";
 
 addAllButtonEventListeners();
-// add event listeners
-// document.getElementById("darkmodetoggle").addEventListener("click", function(){
-//     document.body.classList.toggle("dark-mode");
-// });
 
 document.getElementById("webappbutton").addEventListener("click", function(){
-    const scene = new THREE.Scene();
-    // Object
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0xff0000});
-    const mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
-
-    // const width = window.innerWidth;
-    // const height = window.innerHeight;
-    // Camera
-    // const sizes = {
-    //     width: 800,
-    //     height: 600
-    // }
-    // const sizes = {
-    //     width: width,
-    //     height: height
-    // }
-    const sizes = getCurrentWindowDimensions();
-    const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
-    camera.position.z = 3;
-    scene.add(camera);
-    // Render
-
-    // console.log("web app");
-    // hide elements
     const elements = document.getElementsByClassName("intro");
     for (var i = 0; i < elements.length; i++) {
         elements[i].style.display = "none"; // none to hide or block to show
     }
 
-    // https://stackoverflow.com/questions/66405508/how-do-you-make-a-canvas-change-size-when-resizing-and-remove-side-bar
-    // https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Create_the_Canvas_and_draw_on_it
+    redraw();
 
-    // create new canvas
-    // const width = window.innerWidth;
-    // const height = window.innerHeight;
+    // const scene = new THREE.Scene();
+    // // Object
+    // const geometry = new THREE.BoxGeometry(1, 1, 1);
+    // const material = new THREE.MeshBasicMaterial({ color: 0xff0000});
+    // const mesh = new THREE.Mesh(geometry, material);
+    // scene.add(mesh);
 
-    const canvas = createCanvas();
+    // // const width = window.innerWidth;
+    // // const height = window.innerHeight;
+    // // Camera
+    // // const sizes = {
+    // //     width: 800,
+    // //     height: 600
+    // // }
+    // // const sizes = {
+    // //     width: width,
+    // //     height: height
+    // // }
+    // const sizes = getCurrentWindowDimensions();
+    // const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
+    // camera.position.z = 3;
+    // scene.add(camera);
+    // // Render
 
-    // const canvas = document.createElement("canvas");
-    canvas.class = "webgl";
+    // // console.log("web app");
+    // // hide elements
 
-    // canvas.width = width;
-    // canvas.height = height;
-    // canvas.style.left = "0px";
-    // canvas.style.top = "0px";
-    // canvas.style.absolute = "0px";
 
-    // canvas.id = "canvas";
-    // document.body.appendChild(canvas);
-    // console.log(document.getElementById("canvas"));
+    // // https://stackoverflow.com/questions/66405508/how-do-you-make-a-canvas-change-size-when-resizing-and-remove-side-bar
+    // // https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript/Create_the_Canvas_and_draw_on_it
+
+    // // create new canvas
+    // // const width = window.innerWidth;
+    // // const height = window.innerHeight;
 
     // const canvas = createCanvas();
 
-    const renderer = new THREE.WebGLRenderer({
-        canvas: canvas
-    })
-    renderer.setSize(sizes.width, sizes.height);
-    renderer.render(scene, camera);
+    // // const canvas = document.createElement("canvas");
+    // canvas.class = "webgl";
 
-});
+    // // canvas.width = width;
+    // // canvas.height = height;
+    // // canvas.style.left = "0px";
+    // // canvas.style.top = "0px";
+    // // canvas.style.absolute = "0px";
+
+    // // canvas.id = "canvas";
+    // // document.body.appendChild(canvas);
+    // // console.log(document.getElementById("canvas"));
+
+    // // const canvas = createCanvas();
+
+    // const renderer = new THREE.WebGLRenderer({
+    //     canvas: canvas
+    // })
+    // renderer.setSize(sizes.width, sizes.height);
+    // renderer.render(scene, camera);
+
+    });
 
 
 // document.querySelector("darkmodetoggle").addEventListener("click", function(e) {
