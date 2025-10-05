@@ -13,3 +13,9 @@ In addition to being a useful tool (when it is finished), this app is an exercis
 - Basic editing functionality (move, scale, rotate, duplicate, delete)
 - Save and upload models (eventually)
 - AR support (view models in the real world)
+
+## Running Local Instance
+- Ensure that Node.js is installed
+- Install Vite
+- Install Three.js
+- Use the npm commands
