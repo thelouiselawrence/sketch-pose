@@ -1,7 +1,3 @@
-// import * as THREE from 'three';
-// import * as THREE from "three";
-// import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js";
-
 // code for basic button responses on the main page
 
 console.log("JavaScript is working");
@@ -9,14 +5,14 @@ console.log("JavaScript is working");
 import * as THREE from "three";
 console.log(THREE);
 
-// function toggleDarkMode() {
-//     document.body.classList.toggle("dark-mode");
-// }
+import {createCanvas, refreshCanvasSize, getCurrentWindowDimensions} from "./canvas.js";
+import {addAllButtonEventListeners} from "./home.js";
 
+addAllButtonEventListeners();
 // add event listeners
-document.getElementById("darkmodetoggle").addEventListener("click", function(){
-    document.body.classList.toggle("dark-mode");
-});
+// document.getElementById("darkmodetoggle").addEventListener("click", function(){
+//     document.body.classList.toggle("dark-mode");
+// });
 
 document.getElementById("webappbutton").addEventListener("click", function(){
     const scene = new THREE.Scene();
@@ -26,17 +22,18 @@ document.getElementById("webappbutton").addEventListener("click", function(){
     const mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+    // const width = window.innerWidth;
+    // const height = window.innerHeight;
     // Camera
     // const sizes = {
     //     width: 800,
     //     height: 600
     // }
-    const sizes = {
-        width: width,
-        height: height
-    }
+    // const sizes = {
+    //     width: width,
+    //     height: height
+    // }
+    const sizes = getCurrentWindowDimensions();
     const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
     camera.position.z = 3;
     scene.add(camera);
@@ -56,18 +53,22 @@ document.getElementById("webappbutton").addEventListener("click", function(){
     // const width = window.innerWidth;
     // const height = window.innerHeight;
 
-    const canvas = document.createElement("canvas");
+    const canvas = createCanvas();
+
+    // const canvas = document.createElement("canvas");
     canvas.class = "webgl";
 
-    canvas.width = width;
-    canvas.height = height;
-    canvas.style.left = "0px";
-    canvas.style.top = "0px";
-    canvas.style.absolute = "0px";
+    // canvas.width = width;
+    // canvas.height = height;
+    // canvas.style.left = "0px";
+    // canvas.style.top = "0px";
+    // canvas.style.absolute = "0px";
 
-    canvas.id = "canvas";
-    document.body.appendChild(canvas);
-    console.log(document.getElementById("canvas"));
+    // canvas.id = "canvas";
+    // document.body.appendChild(canvas);
+    // console.log(document.getElementById("canvas"));
+
+    // const canvas = createCanvas();
 
     const renderer = new THREE.WebGLRenderer({
         canvas: canvas
