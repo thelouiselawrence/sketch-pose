@@ -3,10 +3,12 @@ console.log("canvas.js");
 import * as THREE from "three";
 console.log(THREE);
 
+import {} from "./controls.js";
+
 const canvasString = "canvas";
 
 const darkColour = new THREE.Color( 0x222222);
-const lightColour = new THREE.Color( 0xeeeeee);
+const lightColour = new THREE.Color( 0xEEEEEE);
 
 var backgroundColour = lightColour;
 
@@ -24,8 +26,15 @@ camera.position.z = 2;
 scene.add(camera);
 scene.background = lightColour;
 
+// TODO add light
+// const color = 0xAAAAAA;
+// const intensity = 3;
+// const light = new THREE.DirectionalLight(color, intensity);
+// light.position.set(-1, 2, 4);
+// scene.add(light)
+
 window.onresize = function() {
-    render(scene, camera);
+    redrawRenderer(scene, camera);
 }
 
 const renderer = new THREE.WebGLRenderer({
@@ -41,7 +50,7 @@ function changeCanvasColourMode(darkmode) {
     }
     scene.background = backgroundColour;
     // render
-    render(scene, camera);
+    redrawRenderer(scene, camera);
 }
 
 function getCurrentWindowDimensions() {
@@ -59,18 +68,28 @@ function createMesh(vertices, material) {
     return mesh;
 }
 
+var mesh = null;
 function testThreeJSDemo() {
     // Object
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const material = new THREE.MeshBasicMaterial({ color: 0xff0000});
-    const mesh = new createMesh(geometry, material);
+    mesh = new createMesh(geometry, material);
     scene.add(mesh);
-
     // Render
-    render(scene, camera);
+    redrawRenderer(scene, camera);
+    requestAnimationFrame(render);
 }
 
-function render(scene, camera) {
+function render(time) {
+    console.log("rendering")
+    time *= 0.001;  // convert time to seconds
+    mesh.rotation.x = time;
+    mesh.rotation.y = time;
+    renderer.render(scene, camera);
+    requestAnimationFrame(render);
+}
+
+function redrawRenderer(scene, camera) {
     const sizes = getCurrentWindowDimensions();
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
@@ -81,6 +100,5 @@ function render(scene, camera) {
 export {
     canvasString,
     changeCanvasColourMode,
-    getCurrentWindowDimensions,
     testThreeJSDemo
 };
