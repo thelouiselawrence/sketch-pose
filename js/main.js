@@ -2,6 +2,8 @@
 
 console.log("JavaScript is working");
 
-import {intializeHomePage} from "./html.js";
+// import {intializeHomePage} from "./html.js";
 
-intializeHomePage();
+import * as HTML from "./html.js";
+
+HTML.intializeHomePage();

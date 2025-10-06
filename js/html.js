@@ -1,6 +1,15 @@
 console.log("html.js");
 
-import {canvasString, changeCanvasColourMode, clearScene, testThreeJSDemo} from "./canvas.js";
+// import {
+//     canvasString,
+//     changeCanvasColourMode,
+//     clearScene,
+//     testThreeJSDemo
+// } from "./canvas.js";
+
+import * as CANVAS from "./canvas.js";
+
+const canvasString = CANVAS.canvasString;
 
 var webappstatus = false;
 var darkmode = false;
@@ -26,7 +35,7 @@ function addAllEventListeners() {
 function addWebAppButtonEventListener() {
     const button = document.getElementById("webappbutton");
     button.addEventListener("click", function(){
-        clearScene();
+        CANVAS.clearScene();
         if (webappstatus) {
             closeWebApp(button);
         } else {
@@ -46,7 +55,7 @@ function openWebApp(button) {
     hideElementsByClass(homepageString);
     changeCanvasClass(interactiveString);
     showElement(canvas);
-    testThreeJSDemo();
+    CANVAS.testThreeJSDemo();
 }
 
 function closeWebApp(button) {
@@ -67,7 +76,7 @@ function toogleDarkMode() {
     document.body.classList.toggle("dark-mode");
     // TODO toggle canvas background
     darkmode = !darkmode;
-    changeCanvasColourMode(darkmode);
+    CANVAS.changeCanvasColourMode(darkmode);
 }
 
 function hideElemment(element) {

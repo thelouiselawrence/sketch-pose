@@ -3,7 +3,9 @@ console.log("canvas.js");
 import * as THREE from "three";
 console.log(THREE);
 
-import {} from "./controls.js";
+// import {
+// } from "./controls.js";
+// import * as CONTROL from "./controls.js";
 
 const canvasString = "canvas";
 
@@ -26,6 +28,10 @@ camera.position.z = 2;
 scene.add(camera);
 scene.background = lightColour;
 
+const meshes = [];
+const lights = [];
+const cameras = [];
+
 // add light
 const color = 0xEEEE22;
 const intensity = 3;
@@ -41,14 +47,38 @@ const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
 
-function clearScene() {
+function removeMeshFromScene(mesh) {
+    mesh.geometry.dispose();
+    mesh.material.dispose();
     scene.remove(mesh);
-    mesh = null;
+}
+
+function removeAllMeshes() {
+    for (var i = meshes.length - 1; i >= 0; i--) {
+        let mesh = meshes[i];
+        removeMeshFromScene(mesh);
+        meshes.pop();
+    }
+}
+
+function clearScene() {
+    // console.log(scene);
+    // console.log(scene.children);
+    // for( var i = scene.children.length - 1; i >= 0; i--) {
+    //     var obj = scene.children[i];
+    //     scene.remove(obj);
+    // }
+    removeAllMeshes();
+    // scene.remove(mesh);
+    // scene.children = {};
+    // mesh = null;
     // while(scene.children.length > 0){
     //     scene.remove(scene.children[0]);
     // }
     // scene.remove.apply(scene, scene.children);
     renderer.dispose();
+    // console.log(scene);
+    // console.log(scene.children);
 }
 
 function changeCanvasColourMode(darkmode) {
@@ -81,12 +111,14 @@ function createMesh(vertices, material) {
 var mesh = null;
 function testThreeJSDemo() {
     // Object
-    if (mesh == null) {
+    // if (mesh == null) {
+    // if (meshes.length > 0) {
         const geometry = new THREE.BoxGeometry(1, 1, 1);
         const material = new THREE.MeshPhongMaterial({ color: 0xff0000});
         mesh = new createMesh(geometry, material);
+        meshes.push(mesh);
         scene.add(mesh);
-    }
+    // }
 
     // Render
     redrawRenderer(scene, camera);
@@ -94,12 +126,13 @@ function testThreeJSDemo() {
 }
 
 function render(time) {
-    console.log("rendering")
-    time *= 0.001;  // convert time to seconds
-    mesh.rotation.x = time;
-    mesh.rotation.y = time;
-    renderer.render(scene, camera);
-    requestAnimationFrame(render);
+    if (mesh != null) {
+        time *= 0.001;  // convert time to seconds
+        mesh.rotation.x = time;
+        mesh.rotation.y = time;
+        renderer.render(scene, camera);
+        requestAnimationFrame(render);
+    }
 }
 
 function redrawRenderer(scene, camera) {
