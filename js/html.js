@@ -1,29 +1,29 @@
 console.log("html.js");
 
-// import {
-//     canvasString,
-//     changeCanvasColourMode,
-//     clearScene,
-//     testThreeJSDemo
-// } from "./canvas.js";
-
 import * as CANVAS from "./canvas.js";
 
-const canvasString = CANVAS.canvasString;
+// const canvasString = "canvas";
 
 var webappstatus = false;
 var darkmode = false;
 
 const homepageString = "home";
+// const interactiveString = "interactive";
+// const displayString = "display";
 
-const interactiveString = "interactive";
-const displayString = "display";
+const homecanvasString = "homecanvas";
+const webappcanvasString = "webappcanvas";
 
+window.onload = function() {
+    intializeHomePage();
+}
 
 function intializeHomePage() {
-    const canvas = document.getElementById(canvasString);
-    canvas.className = displayString;
-    hideElemment(canvas);
+    hideElemment(document.getElementById(webappcanvasString));
+    const canvas = document.getElementById(homecanvasString)
+    showElement(canvas);
+    CANVAS.loadHomeScene(canvas);
+    CANVAS.render();
     addAllEventListeners();
 }
 
@@ -35,7 +35,7 @@ function addAllEventListeners() {
 function addWebAppButtonEventListener() {
     const button = document.getElementById("webappbutton");
     button.addEventListener("click", function(){
-        CANVAS.clearScene();
+        // CANVAS.clearScene();
         if (webappstatus) {
             closeWebApp(button);
         } else {
@@ -44,26 +44,38 @@ function addWebAppButtonEventListener() {
     });
 }
 
-function changeCanvasClass(className) {
-    const canvas = document.getElementById(canvasString);
-    canvas.className = className;
-}
+// function changeCanvasClass(className) {
+//     const canvas = document.getElementById(canvasString);
+//     canvas.className = className;
+// }
 
 function openWebApp(button) {
+    console.log("open web app", webappstatus);
     webappstatus = true;
+    console.log("open web app", webappstatus);
     button.textContent = "Close Web App";
     hideElementsByClass(homepageString);
-    changeCanvasClass(interactiveString);
+    hideElemment(document.getElementById(homecanvasString));
+
+    const canvas = document.getElementById(webappcanvasString)
     showElement(canvas);
-    CANVAS.testThreeJSDemo();
+    CANVAS.loadAppScene(canvas);
+    CANVAS.render();
 }
 
 function closeWebApp(button) {
+    console.log("close web app", webappstatus);
     webappstatus = false;
+    console.log("close web app", webappstatus);
     button.textContent = "Open Web App";
     showElementsByClass(homepageString);
-    changeCanvasClass(displayString);
-    hideElemment(canvas);
+    hideElemment(document.getElementById(webappcanvasString));
+
+    const canvas = document.getElementById(homecanvasString)
+    showElement(canvas);
+    CANVAS.loadHomeScene(canvas);
+    CANVAS.render();
+
 }
 
 function addToggleDarkModeButtonEventListener() {
@@ -73,8 +85,9 @@ function addToggleDarkModeButtonEventListener() {
 }
 
 function toogleDarkMode() {
+    console.log("toggle dark mode", darkmode);
     document.body.classList.toggle("dark-mode");
-    // TODO toggle canvas background
+    // toggle canvas background
     darkmode = !darkmode;
     CANVAS.changeCanvasColourMode(darkmode);
 }
