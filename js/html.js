@@ -1,6 +1,6 @@
 console.log("html.js");
 
-import {canvasString, changeCanvasColourMode, testThreeJSDemo} from "./canvas.js";
+import {canvasString, changeCanvasColourMode, clearScene, testThreeJSDemo} from "./canvas.js";
 
 var webappstatus = false;
 var darkmode = false;
@@ -26,6 +26,7 @@ function addAllEventListeners() {
 function addWebAppButtonEventListener() {
     const button = document.getElementById("webappbutton");
     button.addEventListener("click", function(){
+        clearScene();
         if (webappstatus) {
             closeWebApp(button);
         } else {

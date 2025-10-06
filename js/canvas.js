@@ -41,6 +41,16 @@ const renderer = new THREE.WebGLRenderer({
     canvas: canvas
 })
 
+function clearScene() {
+    scene.remove(mesh);
+    mesh = null;
+    // while(scene.children.length > 0){
+    //     scene.remove(scene.children[0]);
+    // }
+    // scene.remove.apply(scene, scene.children);
+    renderer.dispose();
+}
+
 function changeCanvasColourMode(darkmode) {
     console.log("change background colour");
     if (darkmode) {
@@ -71,10 +81,13 @@ function createMesh(vertices, material) {
 var mesh = null;
 function testThreeJSDemo() {
     // Object
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshPhongMaterial({ color: 0xff0000});
-    mesh = new createMesh(geometry, material);
-    scene.add(mesh);
+    if (mesh == null) {
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const material = new THREE.MeshPhongMaterial({ color: 0xff0000});
+        mesh = new createMesh(geometry, material);
+        scene.add(mesh);
+    }
+
     // Render
     redrawRenderer(scene, camera);
     requestAnimationFrame(render);
@@ -99,6 +112,7 @@ function redrawRenderer(scene, camera) {
 
 export {
     canvasString,
+    clearScene,
     changeCanvasColourMode,
     testThreeJSDemo
 };
