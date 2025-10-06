@@ -26,12 +26,12 @@ camera.position.z = 2;
 scene.add(camera);
 scene.background = lightColour;
 
-// TODO add light
-// const color = 0xAAAAAA;
-// const intensity = 3;
-// const light = new THREE.DirectionalLight(color, intensity);
-// light.position.set(-1, 2, 4);
-// scene.add(light)
+// add light
+const color = 0xEEEE22;
+const intensity = 3;
+const light = new THREE.DirectionalLight(color, intensity);
+light.position.set(-1, 2, 4);
+scene.add(light);
 
 window.onresize = function() {
     redrawRenderer(scene, camera);
@@ -72,7 +72,7 @@ var mesh = null;
 function testThreeJSDemo() {
     // Object
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({ color: 0xff0000});
+    const material = new THREE.MeshPhongMaterial({ color: 0xff0000});
     mesh = new createMesh(geometry, material);
     scene.add(mesh);
     // Render
