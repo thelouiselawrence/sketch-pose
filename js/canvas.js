@@ -37,7 +37,8 @@ function loadAppScene(canvas) {
         }
     }
     activeScene = appScene;
-    activeScene.background = backgroundColour;
+    setBackgroundColour();
+    // activeScene.scene.background = backgroundColour;
 }
 
 function loadHomeScene(canvas) {
@@ -50,7 +51,8 @@ function loadHomeScene(canvas) {
         }
     }
     activeScene = homeScene;
-    activeScene.background = backgroundColour;
+    setBackgroundColour();
+    // activeScene.scene.background = backgroundColour;
 }
 
 // const homeRenderer = new THREE.WebGLRenderer();
@@ -88,14 +90,21 @@ window.onresize = function() {
 }
 
 function changeCanvasColourMode(darkmode) {
+    // console.log(backgroundColour);
     if (darkmode) {
         backgroundColour = darkColour;
     } else {
         backgroundColour = lightColour;
     }
-    activeScene.background = backgroundColour;
+    // console.log(backgroundColour);
+    // activeScene.scene.background = backgroundColour;
+    setBackgroundColour();
     // render
     render();
+}
+
+function setBackgroundColour() {
+    activeScene.data.scene.background = backgroundColour;
 }
 
 function getCurrentWindowDimensions() {

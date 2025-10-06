@@ -15,6 +15,7 @@ const homecanvasString = "homecanvas";
 const webappcanvasString = "webappcanvas";
 
 window.onload = function() {
+    addAllEventListeners();
     intializeHomePage();
 }
 
@@ -24,7 +25,6 @@ function intializeHomePage() {
     showElement(canvas);
     CANVAS.loadHomeScene(canvas);
     CANVAS.render();
-    addAllEventListeners();
 }
 
 function addAllEventListeners() {
@@ -85,8 +85,9 @@ function addToggleDarkModeButtonEventListener() {
 }
 
 function toogleDarkMode() {
-    console.log("toggle dark mode", darkmode);
+    // console.log("toggle dark mode", darkmode);
     document.body.classList.toggle("dark-mode");
+    // console.log("toggle dark mode", darkmode);
     // toggle canvas background
     darkmode = !darkmode;
     CANVAS.changeCanvasColourMode(darkmode);
