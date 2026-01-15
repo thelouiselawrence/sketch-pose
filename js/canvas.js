@@ -6,6 +6,7 @@ console.log(THREE);
 import * as SCENE from "./scene.js";
 import * as CHARACTER from "./character.js";
 // import * as CONTROL from "./controls.js";
+// CHARACTER.characters();
 
 
 // const homeScene = SCENE.createHomeScene();

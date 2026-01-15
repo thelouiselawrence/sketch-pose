@@ -14,49 +14,168 @@ function Joint(name, position) {
     this.position = position;
 }
 
-// function Genetics(sex) {
-//     // this stores data unique to each individual character
-//     // sex is a string, either M or F
-//     // value for head height
-//     // value for limb length
-//     this.sex = sex;
-//     this.isMale = function() {
-//         return this.sex === "M";
-//     }
-//     this.isFemale = function() {
-//         return this.sex === "F";
-//     }
-// }
 
 function Character(age, sex, head, limb, name) {
     // age is a number, 0 or greater
     this.age = age;
     // sex is a boolean, true for male, false for female
     this.sex = sex;
-    // head is a number between 0 and 1, used for calculating measurements
+    // head is boolean, or a number between 0 and 1, used for calculating measurements
     this.head = head;
-    // limb is a number between 0 and 1, used for calculating measurements
+    // limb is a boolean, or a number between 0 and 1, used for calculating measurements
     this.limb = limb;
     // name is a string, and is optional, use "" if there is no name
     this.name = name;
+    this.sexCode = function() {
+        if (this.sex === true) {
+            return "M";
+        } else {
+            return "F";
+        }
+    }
     // calculate life stage from age
     this.lifeStage = function() {
-        // should return a number between 0 and 5
+        // should return a number between 1 and 5
+        // (1) infant, (2) child, (3) tween, (4) teen, (5) adult
         let lifeStage = this.age + 1;
         if (lifeStage > 16) {
             lifeStage = 16;
         }
         lifeStage = 4 * lifeStage / 15;
         lifeStage = Math.ceil(lifeStage);
+        return lifeStage - 1;
+    }
+    this.lifeStage2 = function() {
+        let lifeStage = this.lifeStage()
+        if (lifeStage > 3) {
+            lifeStage = 3;
+        }
         return lifeStage;
     }
     this.headHeightRatio = function() {
-        return this.lifeStage() + 4;
+        // let headHeightRatio = this.lifeStage2() + 4;
+        // // adjust for the sex differences for teenagers and adults
+        // if (this.lifeStage() > 4) {
+        //     // adult only
+        //     headHeightRatio = headHeightRatio; // + this.limb;
+        // }
+        let lifeStage = this.lifeStage();
+        let headHeightRatio = lifeStage + 4;
+        if (lifeStage > 3 & this.limb === false) {
+            // adult only
+            headHeightRatio = headHeightRatio - 1;
+        }
+        return headHeightRatio;
+    }
+    this.headHeight = function() {
+        let headHeight = this.lifeStage2() + 1;
+        if (this.lifeStage() > 3) {
+            headHeight = headHeight + this.sex + this.head;
+        }
+        return headHeight;
+    }
+    this.characterHeight = function() {
+        return this.headHeight() * this.headHeightRatio();
+    }
+}
+
+function characters() {
+    let ages = [1, 5, 9, 13, 17, 21];
+    let booleans = [false, true];
+    // loop through ages
+    for (let i = 0; i < ages.length; i++) {
+        let age = ages[i];
+        // loop through sexes
+        for (let j = 0; j < booleans.length; j++) {
+            let sex = booleans[j];
+            // loop through head heights
+            for (let k = 0; k < booleans.length; k++) {
+                let headHeight = booleans[k];
+                // loop through limb lengths
+                for (let l = 0; l < booleans.length; l++) {
+                    let limbLength = booleans[l];
+                    // create character and display details to console
+                    let character = new Character(age, sex, headHeight, limbLength, "");
+                    console.log(character);
+                    console.log(character.sexCode(), character.age);
+                    console.log("Life Stage 1", character.lifeStage());
+                    console.log("Life Stage 2", character.lifeStage2());
+                    // console.log("Head Height", character.headHeight());
+                    console.log("Head to Height Ratio", character.headHeightRatio());
+                    // console.log("Life Stage", character.lifeStage(), character.lifeStage2());
+                    // console.log("Ratio", character.headHeightRatio());
+                    // console.log("Head Height", character.headHeight());
+                    // console.log("Character Height", character.characterHeight());
+                }
+            }
+
+        }
     }
 
-
-
 }
+
+characters();
+
+
+// const age1 = 1;
+// console.log(new Character(age1, true, true, true, ""));
+// console.log(new Character(age1, true, false, true, ""));
+// console.log(new Character(age1, true, false, false, ""));
+// console.log(new Character(age1, true, true, false, ""));
+
+// console.log(new Character(age1, false, true, true, ""));
+// console.log(new Character(age1, false, false, true, ""));
+// console.log(new Character(age1, false, false, false, ""));
+// console.log(new Character(age1, false, true, false, ""));
+
+// const age2 = 5;
+// console.log(new Character(age2, true, true, true, ""));
+// console.log(new Character(age2, true, false, true, ""));
+// console.log(new Character(age2, true, false, false, ""));
+// console.log(new Character(age2, true, true, false, ""));
+
+// console.log(new Character(age2, false, true, true, ""));
+// console.log(new Character(age2, false, false, true, ""));
+// console.log(new Character(age2, false, false, false, ""));
+// console.log(new Character(age2, false, true, false, ""));
+
+
+// const age3 = 9;
+// console.log(new Character(age3, true, true, true, ""));
+// console.log(new Character(age3, true, false, true, ""));
+// console.log(new Character(age3, true, false, false, ""));
+// console.log(new Character(age3, true, true, false, ""));
+
+// console.log(new Character(age3, false, true, true, ""));
+// console.log(new Character(age3, false, false, true, ""));
+// console.log(new Character(age3, false, false, false, ""));
+// console.log(new Character(age3, false, true, false, ""));
+
+
+// const age4 = 13;
+// console.log(new Character(age4, true, true, true, ""));
+// console.log(new Character(age4, true, false, true, ""));
+// console.log(new Character(age4, true, false, false, ""));
+// console.log(new Character(age4, true, true, false, ""));
+
+// console.log(new Character(age4, false, true, true, ""));
+// console.log(new Character(age4, false, false, true, ""));
+// console.log(new Character(age4, false, false, false, ""));
+// console.log(new Character(age4, false, true, false, ""));
+
+
+// const age5 = 17;
+// console.log(new Character(age5, true, true, true, ""));
+// console.log(new Character(age5, true, false, true, ""));
+// console.log(new Character(age5, true, false, false, ""));
+// console.log(new Character(age5, true, true, false, ""));
+
+// console.log(new Character(age5, false, true, true, ""));
+// console.log(new Character(age5, false, false, true, ""));
+// console.log(new Character(age5, false, false, false, ""));
+// console.log(new Character(age5, false, true, false, ""));
+
+
 
 
 // types of characters
@@ -67,7 +186,7 @@ function Character(age, sex, head, limb, name) {
 // tween 10-12 years 6 heads
 // tween 12-14 years 6.5 heads
 // teenager 14-16 years 7 heads
-// teenager 16-18 years 8 heads
+// teenager 16-18 years 7.5 heads
 // adult 18+ years 8 heads
 
 
@@ -77,58 +196,3 @@ function Character(age, sex, head, limb, name) {
 // child - tween 6-10 years 6 heads
 // teenager 10-14 years 7 heads
 // adult 14+ years 8 heads
-
-
-
-// function Character(age, name) {
-//     // age is a number, usually an integer
-//     this.age = age;
-//     // name is a string, and optional
-//     this.name = name;
-// }
-
-
-// function Character(sex, age, tall, name) {
-//     // sex is a boolean to represent either male or female, male true, female false
-//     // age is a number, usually an integer
-//     // tall is a boolean
-//     // name is a string, and optional
-//     this.sex = sex;
-//     this.age = age;
-//     this.tall = tall;
-//     this.name = name;
-//     this.headHeightRatio = function() {
-//         return this.age + 4;
-//     };
-//     this.headHeight = function() {
-//         return this.headHeightRatio() + 1
-
-//     };
-//     this.characterHeight = function() {
-
-//     };
-
-// }
-
-
-// function headHeightRatioFromStageOfLife(stage_of_life) {
-//     // stage of life should be a number, usually an integer, between 0 and 5
-//     return stage_of_life + 4;
-// }
-
-
-// function headHeightRatioFromAgeAsYears(age_as_years) {
-//     // age as years should be a number, usually an integer, 0 or greater
-//     return
-// }
-
-
-// function createJoint(jointName, jointPosition) {
-//     // jointName should be a string
-//     // jointPosition should be a THREE.Vector3
-//     var joint = {
-//         name: jointName,
-//         position: jointPosition
-//     }
-//     return joint;
-// }
