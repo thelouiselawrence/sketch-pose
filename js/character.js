@@ -53,14 +53,9 @@ function Character(age, sex, head, limb, name) {
         return lifeStage;
     }
     this.headHeightRatio = function() {
-        // let headHeightRatio = this.lifeStage2() + 4;
-        // // adjust for the sex differences for teenagers and adults
-        // if (this.lifeStage() > 4) {
-        //     // adult only
-        //     headHeightRatio = headHeightRatio; // + this.limb;
-        // }
         let lifeStage = this.lifeStage();
         let headHeightRatio = lifeStage + 4;
+        // adjust for height variation in teenagers and adults
         if (lifeStage > 3 & this.limb === false) {
             // adult only
             headHeightRatio = headHeightRatio - 1;
@@ -68,9 +63,17 @@ function Character(age, sex, head, limb, name) {
         return headHeightRatio;
     }
     this.headHeight = function() {
-        let headHeight = this.lifeStage2() + 1;
-        if (this.lifeStage() > 3) {
-            headHeight = headHeight + this.sex + this.head;
+        let headHeight = this.lifeStage2() + 5;
+        // adjust for height varation in teens and adults, caused by sex differences
+        let lifeStage = this.lifeStage();
+        if (lifeStage > 3) {
+            // adult only
+            if (this.sex === true) {
+                headHeight = headHeight + 1;
+            }
+            if (this.head === true) {
+                headHeight = headHeight + 1;
+            }
         }
         return headHeight;
     }
@@ -100,8 +103,10 @@ function characters() {
                     console.log(character.sexCode(), character.age);
                     console.log("Life Stage 1", character.lifeStage());
                     console.log("Life Stage 2", character.lifeStage2());
-                    // console.log("Head Height", character.headHeight());
                     console.log("Head to Height Ratio", character.headHeightRatio());
+                    console.log("Head Height", character.headHeight());
+                    console.log("Character Height", character.characterHeight());
+
                     // console.log("Life Stage", character.lifeStage(), character.lifeStage2());
                     // console.log("Ratio", character.headHeightRatio());
                     // console.log("Head Height", character.headHeight());
