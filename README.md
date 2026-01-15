@@ -19,3 +19,21 @@ In addition to being a useful tool (when it is finished), this app is an exercis
 - Install Vite
 - Install Three.js
 - Use the npm commands
+
+## Notes
+Creating a Three.js project from scratch is somewhat challenging as many of the instructions are incomplete.
+
+However, the Three.js Journey tutorial seems to be the best.
+
+-	Make sure that Node.js is installed (W3Schools has some good instructions)
+-	Navigate to the folder with the Sketch & Pose project
+-	Open the terminal (or command tool) and create a package.json
+    -	npm init -y
+-	Install Vite and initialize the node_modules folder
+    -	npm install vite
+-	Install Three.js
+    -	npm install three
+-	Run
+    -	npm run dev
+-	Open the browser using the host name
+-	Everything should be running

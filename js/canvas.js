@@ -4,6 +4,7 @@ import * as THREE from "three";
 console.log(THREE);
 
 import * as SCENE from "./scene.js";
+import * as CHARACTER from "./character.js";
 // import * as CONTROL from "./controls.js";
 
 
@@ -14,11 +15,11 @@ import * as SCENE from "./scene.js";
 const darkColour = new THREE.Color( 0x222222);
 const lightColour = new THREE.Color( 0xEEEEEE);
 
-var backgroundColour = lightColour;
+let backgroundColour = lightColour;
 
-var homeScene = null;
-var appScene = null;
-var activeScene = null;
+let homeScene = null;
+let appScene = null;
+let activeScene = null;
 
 function createRenderer(canvas) {
     const renderer = new THREE.WebGLRenderer({
