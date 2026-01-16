@@ -55,6 +55,7 @@ function createAppScene() {
     addLight(data, light);
     addCamera(data, camera);
 
+    // TODO remove box
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const material = new THREE.MeshPhongMaterial({ color: 0xFF0000});
     const mesh = new createMesh(geometry, material);
