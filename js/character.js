@@ -1,7 +1,4 @@
 import * as THREE from "three";
-import { FunctionCall } from "three/examples/jsm/transpiler/AST.js";
-import { code } from "three/tsl";
-
 
 // need to create a skeleton of the joints
 // skeleton object
@@ -21,7 +18,7 @@ function sexCode(sex) {
 
 // stages of growth
 // Option A: 5 stages -> head to height ratios are integers (4, 5, 6, 7, 8)
-// Option B: 9 stages -> head to height ratios are floating points (increments of 0.5)
+// Option B: 10 stages -> head to height ratios are floating points (increments of 0.5, between 4 and 8.5)
 
 function calculateLifeStageA(age) {
     // should return a number between 1 and 5
@@ -50,7 +47,7 @@ function calculateLifeStageB(age) {
 function calculateGrowthStageA(age) {
     let growthStage = calculateLifeStageA(age);
     // growth is optional after this point
-    // this corresponds to an of 10+
+    // this corresponds to an age of 10+
     if (growthStage > 4) {
         growthStage = 4;
     }
@@ -59,7 +56,7 @@ function calculateGrowthStageA(age) {
 
 function calculateGrowthStageB(age) {
     // growth is optional after this point
-    // this corresponds to an of 12+
+    // this corresponds to an age of 12+
     let growthStage = calculateLifeStageB(age);
     if (growthStage > 6) {
         growthStage = 6;
@@ -89,7 +86,7 @@ function calculateHeadToHeightRatioB(age, sex, growth) {
     let lifeStage = calculateLifeStageB(age);
     if (lifeStage > growthStage) {
         // adjust growth for female
-        if (sex == false && growth > 2) {
+        if (sex === false && growth > 2) {
             growth = 2;
         }
         let difference = lifeStage - growthStage;
@@ -129,9 +126,9 @@ function calculateCharacterHeightA(age, sex, longerLimb, longerHead) {
 function calculateCharacterHeightB() {}
 
 
-function createRootJoint(age, sex, head, limb) {
+// function createRootJoint(age, sex, head, limb) {
 
-}
+// }
 
 
 // export {
@@ -167,7 +164,6 @@ function testCharactersA() {
 
 
 function testCharactersB() {
-    // TODO change A to B
     let ages = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21];
     let sexes = [false, true];
     // add arrays of integers
