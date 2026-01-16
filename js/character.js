@@ -23,103 +23,10 @@ function sexCode(sex) {
 // Option A: 5 stages -> head to height ratios are integers (4, 5, 6, 7, 8)
 // Option B: 9 stages -> head to height ratios are floating points (increments of 0.5)
 
-// function calculateLifeStageA(age) {
-//     // age is an integer that is zero or greater
-//     // should return an integer between 1 and 5
-//     let lifeStage = age + 1;
-//     if (lifeStage > 16) {
-//         lifeStage = 16;
-//     }
-//     lifeStage = 4 * lifeStage / 15;
-//     lifeStage = Math.ceil.apply(lifeStage);
-//     return lifeStage;
-// }
-
-// function calculateGrowthStageA(age) {
-//     let growthState = calculateLifeStageA(age);
-//     if (growthState > 4) {
-//         growthState = 4;
-//     }
-//     return growthState;
-// }
-
-// function calculateHeadToHeightRatioA(age, limb) {
-//     let lifeStage = calculateLifeStageA(age);
-//     let headHeightRatio = lifeStage + 3
-//     if (lifeStage > 2 & limb === false) {
-//         // adult only
-//         headHeightRatio = headHeightRatio - 1;
-//     }
-//     return headHeightRatio;
-// }
-
-// function calculateHeadHeightA(age, sex, head) {
-//     let headHeight = calculateGrowthStageA(age) + 4;
-//     let lifeStage = calculateLifeStageA(age, head);
-//     if (lifeStage > 4) {
-//         // adult only
-//         if (sex === true) {
-//             headHeight = headHeight + 1;
-//         }
-//         if (head === true) {
-//             headHeight = headHeight + 1;
-//         }
-//     }
-//     return headHeight;
-// }
-
-// function calculateCharacterHeightA(age, sex, limb, head) {
-//     let headHeight = calculateHeadHeightA(age, sex, head);
-//     let headHeightRatio = calculateHeadToHeightRatioA(age, limb);
-//     let characterHeight = headHeight * headHeightRatio;
-//     return characterHeight;
-// }
-
-// function calculateLifeStageB(age, growthVaration, heightVariation) {
-//     // age is an integer that is zero or greater
-//     // need value to indicate when character stops growing
-//     // deviation from the average height final height
-// }
-
-// function testCharactersA() {
-//     let ages = [1, 5, 9, 13, 17, 21];
-//     let booleans = [false, true];
-//     // loop through ages
-//     for (let i = 0; i < ages.length; i++) {
-//         let age = ages[i];
-//         // loop through sexes
-//         for (let j = 0; j < booleans.length; j++) {
-//             let sex = booleans[j];
-//             // loop through head heights
-//             for (let k = 0; k < booleans.length; k++) {
-//                 let headHeight = booleans[k];
-//                 // loop through limb lengths
-//                 for (let l = 0; l < booleans.length; l++) {
-//                     let limbLength = booleans[l];
-//                     // create character and display details to console
-//                     console.log(sexCode(sex), age);
-//                     console.log("Life Stage", calculateLifeStageA(age), calculateGrowthStageA(age));
-//                     console.log("Head Height Ratio", calculateHeadToHeightRatioA(age, limbLength));
-//                     console.log("Head Height", calculateHeadHeightA(age, sex, headHeight));
-//                     console.log("Character Height", calculateCharacterHeightA(age, sex, limbLength, headHeight));
-//                 }
-//             }
-//         }
-//     }
-// }
-
-// testCharactersA();
-
-// function calculateGrowthStageB() {}
-// function calculateHeadToHeightRatioB() {}
-// function calculateHeadHeightB() {}
-// function calculateCharacterHeightB() {}
-
-
-
 function calculateLifeStageA(age) {
     // should return a number between 1 and 5
     // (1) infant, (2) child, (3) tween, (4) teen, (5) adult
+    // assumes that all growth stops at 14
     let lifeStage = age + 1;
     if (lifeStage > 16) {
         lifeStage = 16;
@@ -129,17 +36,36 @@ function calculateLifeStageA(age) {
     return lifeStage;
 }
 
-function calculateLifeStageB() {}
+function calculateLifeStageB(age) {
+    // should return a number between 0 and 9
+    // assumes that all growth stops at 18
+    let lifeStage = age / 2;
+    lifeStage = Math.floor(lifeStage);
+    if (lifeStage > 9) {
+        lifeStage = 9
+    }
+    return lifeStage;
+}
 
 function calculateGrowthStageA(age) {
     let growthStage = calculateLifeStageA(age);
+    // growth is optional after this point
+    // this corresponds to an of 10+
     if (growthStage > 4) {
         growthStage = 4;
     }
     return growthStage;
 }
 
-function calculateGrowthStageB() {}
+function calculateGrowthStageB(age) {
+    // growth is optional after this point
+    // this corresponds to an of 12+
+    let growthStage = calculateLifeStageB(age);
+    if (growthStage > 6) {
+        growthStage = 6;
+    }
+    return growthStage;
+}
 
 function calculateHeadToHeightRatioA(age, longerLimb) {
     let lifeStage = calculateLifeStageA(age);
@@ -219,7 +145,8 @@ function testCharactersA() {
 
 function testCharactersB() {
     // TODO change A to B
-    let ages = [1, 5, 9, 13, 17, 21];
+    let ages = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21];
+    let sexes = [false, true];
     // add arrays of integers
     let booleans = [false, true];
     // loop through ages
@@ -227,7 +154,9 @@ function testCharactersB() {
         let age = ages[i];
         // loop through sexes
         for (let j = 0; j < booleans.length; j++) {
-            let sex = booleans[j];
+            let sex = sexes[j];
+            console.log(sexCode(sex), age);
+            console.log("Life Stage", calculateLifeStageB(age), calculateGrowthStageB(age));
             // loop through head heights
             for (let k = 0; k < booleans.length; k++) {
                 let headHeight = booleans[k];
@@ -235,16 +164,19 @@ function testCharactersB() {
                 for (let l = 0; l < booleans.length; l++) {
                     let limbLength = booleans[l];
                     // create character and display details to console
-                    console.log(sexCode(sex), age);
-                    console.log("Life Stage", calculateLifeStageA(age), calculateGrowthStageA(age));
-                    console.log("Head Height Ratio", calculateHeadToHeightRatioA(age, limbLength));
-                    console.log("Head Height", calculateHeadHeightA(age, sex, headHeight));
-                    console.log("Character Height", calculateCharacterHeightA(age, sex, limbLength, headHeight));
+                    // console.log(sexCode(sex), age);
+                    // console.log("Life Stage", calculateLifeStageB(age), calculateGrowthStageB(age));
+                    // console.log("Head Height Ratio", calculateHeadToHeightRatioB(age, limbLength));
+                    // console.log("Head Height", calculateHeadHeightB(age, sex, headHeight));
+                    // console.log("Character Height", calculateCharacterHeightB(age, sex, limbLength, headHeight));
                 }
             }
         }
     }
 }
+
+
+// testCharactersA();
 testCharactersB();
 
 
@@ -259,7 +191,7 @@ testCharactersB();
 // teenager 12-14 years 7 heads
 // teenager 14-16 years 7.5 heads
 // teenager 16-18 8 heads
-// adult 16+ years 8.5 heads
+// adult 18+ years 8.5 heads
 
 
 // types of characters
