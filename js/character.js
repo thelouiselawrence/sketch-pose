@@ -69,15 +69,38 @@ function calculateGrowthStageB(age) {
 
 function calculateHeadToHeightRatioA(age, longerLimb) {
     let lifeStage = calculateLifeStageA(age);
-    let headHeightRatio = lifeStage + 3
-    if (lifeStage > 2 & longerLimb === false) {
+    let headHeightRatio = lifeStage + 3;
+    if (lifeStage > 2 & longerLimb === true) {
         // adult only
         headHeightRatio = headHeightRatio - 1;
     }
     return headHeightRatio;
 }
 
-function calculateHeadToHeightRatioB() {}
+function calculateHeadToHeightRatioB(age, sex, growth) {
+    // age is required (int 0+)
+    // sex is required, as females stop growing before males (boolean)
+    // need to figure out when the growth stops  (int 0 - 3)
+
+    let headHeightRatio = 4; // starting head height ratio
+    let growthStage = calculateGrowthStageB(age);
+    headHeightRatio = headHeightRatio + growthStage * 0.5;
+
+    let lifeStage = calculateLifeStageB(age);
+    if (lifeStage > growthStage) {
+        // adjust growth for female
+        if (sex == false && growth > 2) {
+            growth = 2;
+        }
+        let difference = lifeStage - growthStage;
+        if (growth < difference) {
+            headHeightRatio = headHeightRatio + growth * 0.5;
+        } else {
+            headHeightRatio = headHeightRatio + difference * 0.5;
+        }
+    }
+    return headHeightRatio;
+}
 
 function calculateHeadHeightA(age, sex, longerHead) {
     let headHeight = calculateGrowthStageA(age) + 4;
@@ -148,17 +171,20 @@ function testCharactersB() {
     let ages = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21];
     let sexes = [false, true];
     // add arrays of integers
+    let growths = [0, 1, 2, 3];
     let booleans = [false, true];
     // loop through ages
     for (let i = 0; i < ages.length; i++) {
         let age = ages[i];
         // loop through sexes
-        for (let j = 0; j < booleans.length; j++) {
+        for (let j = 0; j < sexes.length; j++) {
             let sex = sexes[j];
-            console.log(sexCode(sex), age);
-            console.log("Life Stage", calculateLifeStageB(age), calculateGrowthStageB(age));
             // loop through head heights
-            for (let k = 0; k < booleans.length; k++) {
+            for (let k = 0; k < growths.length; k++) {
+                let growth = growths[k];
+                console.log(sexCode(sex), age);
+                console.log("Life Stage", calculateLifeStageB(age), calculateGrowthStageB(age));
+                console.log("Head Height Ratio", calculateHeadToHeightRatioB(age, sex, growth));
                 let headHeight = booleans[k];
                 // loop through limb lengths
                 for (let l = 0; l < booleans.length; l++) {
